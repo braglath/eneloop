@@ -1,7 +1,9 @@
 import 'package:energy/app/data/resources/assets/string_assets.dart';
+import 'package:energy/app/data/resources/assets/url_assets.dart';
 import 'package:energy/app/data/resources/color_resources.dart';
 import 'package:energy/app/modules/home/views/parallax.dart';
 import 'package:energy/app/views/animations/scale_animation.dart';
+import 'package:energy/app/views/global/cached_n_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -65,15 +67,23 @@ class HomeAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Column(
         children: [
-          FadedScaleAnimation(
+          const FadedScaleAnimation(
             CircleAvatar(
+              backgroundColor: APP_MID_GREEN,
               radius: 50,
-              backgroundColor: APP_MID_GREEN.withOpacity(0.3),
               child: CircleAvatar(
-                  radius: 48,
-                  backgroundImage: NetworkImage(
-                    'https://i.imgur.com/q9rhg0n.jpg',
-                  )),
+                radius: NUM_48,
+                backgroundColor: WHITE,
+                child: ClipOval(
+                  child: CachedNImage(
+                    imagefromNetwork: UrlAssets.myProfileImage,
+                    fit: BoxFit.cover,
+                    width: NUM_100,
+                    height: NUM_100,
+                    isProfile: true,
+                  ),
+                ),
+              ),
             ),
             durationInMilliseconds: 800,
           ),
@@ -99,7 +109,7 @@ class HomeAppBar extends StatelessWidget {
                     children: [
                       IconButton(
                           onPressed: () {},
-                          icon: FaIcon(FontAwesomeIcons.bell)),
+                          icon: const FaIcon(FontAwesomeIcons.bell)),
                       IconButton(
                           onPressed: () {},
                           icon: const FaIcon(FontAwesomeIcons.gripLines)),

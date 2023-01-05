@@ -85,11 +85,17 @@ class LocationListItem extends StatelessWidget {
         backgroundImageKey: _backgroundImageKey,
       ),
       children: [
-        Image.network(
-          imageUrl,
-          key: _backgroundImageKey,
-          fit: BoxFit.cover,
-        ),
+        Image.network(imageUrl, key: _backgroundImageKey, fit: BoxFit.cover,
+            loadingBuilder: (BuildContext context, Widget child,
+                ImageChunkEvent? loadingProgress) {
+          if (loadingProgress == null) return child;
+          return const Center(
+            child: Center(
+                child: CircularProgressIndicator(
+              color: APP_MID_GREEN,
+            )),
+          );
+        }),
       ],
     );
   }
